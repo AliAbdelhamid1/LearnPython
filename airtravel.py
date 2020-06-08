@@ -109,22 +109,50 @@ class Flight:
     def airline(self):
         return self._number[:2]
 
-class Aircraft:
+class AirbusA319:
 
-    def __init__(self, registration, model, num_rows, num_seats_per_row):
+    def __init__(self, registration):
         self._registration = registration
-        self._model = model
-        self._rows = num_rows
-        self._num_seats_per_row = num_seats_per_row
 
     def registration(self):
         return self._registration
 
     def model(self):
-        return self._model
+        return "Airbus A319"
 
     def seating_plan(self):
-        return (range(1,self._rows + 1), "ABCDEFGHJK"[:self._num_seats_per_row])
+        return range(1,23), "ABCDEF"
+
+class Boeing777:
+
+    def __init__(self, registration):
+        self._registration = registration
+
+    def registration(self):
+        return self._registration
+
+    def model(self):
+        return "Boeing 777"
+
+    def seating_plan(self):
+        return range(1,56), "ABCDEFGHJK"
+    
+#class Aircraft:
+
+    #def __init__(self, registration, model, num_rows, num_seats_per_row):
+        #self._registration = registration
+        #self._model = model
+        #self._rows = num_rows
+        #self._num_seats_per_row = num_seats_per_row
+
+    #def registration(self):
+        #return self._registration
+
+    #def model(self):
+        #return self._model
+
+    #def seating_plan(self):
+        #return (range(1,self._rows + 1), "ABCDEFGHJK"[:self._num_seats_per_row])
 
 
 def console_card_printer(passenger, seat, flight_number, aircraft):
@@ -140,10 +168,16 @@ def console_card_printer(passenger, seat, flight_number, aircraft):
     print(card)
     print()
 
-def make_flight():
-    f = Flight("BA758", Aircraft("G-EUPT", "Airbus A319", num_rows=22, num_seats_per_row=6))
+def make_flights():
+    f = Flight("BA758", AirbusA319("G-EUPT"))
     f.allocate_seat("12A", "Ali")
     f.allocate_seat("15F", "Alaa")
     f.allocate_seat("13D", "Mom")
-    return f
+
+    g = Flight("AF73", Boeing777("F-GSPS"))
+    g.allocate_seat("12A", "Baba")
+    g.allocate_seat("15F", "Ahmad")
+    g.allocate_seat("13D", "Me")
+
+    return f, g
 
