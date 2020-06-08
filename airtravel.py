@@ -1,5 +1,38 @@
 """Model for aircraft flights"""
 
+class Aircraft:
+
+    def __init__(self, registration):
+        self._registration = registration
+
+    def registration(self):
+        return self._registration
+
+    def num_seats(self):
+        rows, row_seats = self.seating_plan()
+        return len(rows) * len(row_seats)
+
+
+class AirbusA319(Aircraft):
+
+    def model(self):
+        return "Airbus A319"
+
+    def seating_plan(self):
+        return range(1,23), "ABCDEF"
+
+
+
+class Boeing777(Aircraft):
+
+    def model(self):
+        return "Boeing 777"
+
+    def seating_plan(self):
+        return range(1,56), "ABCDEFGHJK"
+
+
+
 class Flight:
     """ A flight with a particular passenger aircraft.
     
@@ -109,34 +142,9 @@ class Flight:
     def airline(self):
         return self._number[:2]
 
-class AirbusA319:
 
-    def __init__(self, registration):
-        self._registration = registration
 
-    def registration(self):
-        return self._registration
 
-    def model(self):
-        return "Airbus A319"
-
-    def seating_plan(self):
-        return range(1,23), "ABCDEF"
-
-class Boeing777:
-
-    def __init__(self, registration):
-        self._registration = registration
-
-    def registration(self):
-        return self._registration
-
-    def model(self):
-        return "Boeing 777"
-
-    def seating_plan(self):
-        return range(1,56), "ABCDEFGHJK"
-    
 #class Aircraft:
 
     #def __init__(self, registration, model, num_rows, num_seats_per_row):
@@ -153,6 +161,7 @@ class Boeing777:
 
     #def seating_plan(self):
         #return (range(1,self._rows + 1), "ABCDEFGHJK"[:self._num_seats_per_row])
+
 
 
 def console_card_printer(passenger, seat, flight_number, aircraft):
